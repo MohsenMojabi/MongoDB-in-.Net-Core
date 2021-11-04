@@ -22,7 +22,7 @@ namespace MongoDBSample.Services
         public List<Person> Get()
         {
             List<Person> people;
-            people = _people.Find(emp => true).ToList();
+            people = _people.Find(person => true).ToList();
             return people;
         }
 
