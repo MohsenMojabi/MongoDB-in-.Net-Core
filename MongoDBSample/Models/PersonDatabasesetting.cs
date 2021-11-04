@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace MongoDBSample.Models
 {
-    public class EmployeeDatabaseSettings : IEmployeeDatabaseSettings
+    public class PersonDatabaseSettings : IPersonDatabaseSettings
     {
-        public string EmployeesCollectionName { get; set; }
+        public string PersonCollectionName { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }
 
-    public interface IEmployeeDatabaseSettings
+    public interface IPersonDatabaseSettings
     {
-        public string EmployeesCollectionName { get; set; }
+        public string PersonCollectionName { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }
