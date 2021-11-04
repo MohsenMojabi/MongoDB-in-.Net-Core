@@ -12,23 +12,11 @@ You can use MongoDBCompass to create and manipulate your databases.
 # Working with MongoDB database from an ASP.NET Core Web API application
 
 1- Add the MongoDB.Driver NuGet package to youe Project. This will allow us to access the MongoDB database via friendly APIs.
-
-2- Configure the required services in the Startup.cs file as shown below:
 ```
-public void ConfigureServices(IServiceCollection services)
-        {
-            services.Configure<PersonDatabaseSettings>(
-                Configuration.GetSection(nameof(PersonDatabaseSettings)));
-
-            services.AddSingleton<IPersonDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<PersonDatabaseSettings>>().Value);
-
-            services.AddSingleton<PersonService>();
-            services.AddControllers();
-        }
+MongoDB.Driver
 ```
 
-3- Add MongoDB settings to the appsettings.config file :
+2- Add MongoDB settings to the appsettings.config file :
 ```
 "PersonDatabaseSettings": {
     "PersonCollectionName": "Person",
@@ -37,7 +25,7 @@ public void ConfigureServices(IServiceCollection services)
   },
 ```
 
-4- Create a new folder called “Models” and create the PersonDatabaseSettings.cs file with the following code inside it:
+3- Create a new folder called “Models” and create the PersonDatabaseSettings.cs file with the following code inside it:
 ```
 public class PersonDatabaseSettings : IPersonDatabaseSettings
     {
@@ -54,7 +42,7 @@ public class PersonDatabaseSettings : IPersonDatabaseSettings
     }
 ```
 
-5- Create the Person.cs file inside “Models” Folder with these code:
+4- Create the Person.cs file inside “Models” Folder with these code:
 ```
 public class Person
     {
@@ -73,7 +61,7 @@ public class Person
     }
 ```
 
-6- Create a folder called “Services” and add a new class called “PersonService.cs” to it as shown below:
+5- Create a folder called “Services” and add a new class called “PersonService.cs” to it as shown below:
 ```
 public class PersonService
     {
@@ -116,7 +104,22 @@ public class PersonService
     }
 ```
 
-7- Finally add a new controller called “PersonController” as shown below:
+6- Configure the required services in the Startup.cs file as shown below:
+```
+public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<PersonDatabaseSettings>(
+                Configuration.GetSection(nameof(PersonDatabaseSettings)));
+
+            services.AddSingleton<IPersonDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<PersonDatabaseSettings>>().Value);
+
+            services.AddSingleton<PersonService>();
+            services.AddControllers();
+        }
+```
+
+7- Finally add a new controller in “Controllers” folder called “PersonController” as shown below:
 ```
 [Route("api/[controller]")]
     [ApiController]
@@ -184,3 +187,6 @@ public class PersonService
 
     }
 ```
+
+Now You can use PostMan to test your project.
+
